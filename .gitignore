@@ -104,3 +104,9 @@ submissions/
 .env.local
 .env.*.local
 secrets.json
+train_tracking/
+train_annotation/
+test_tracking/
+train.csv
+test.csv
+sample_submission.csv
