@@ -1,0 +1,19 @@
+defaults:
+  - data: default
+  - model: dual_branch
+  - training: default
+  - decoding: default
+
+# Data paths
+data_dir: /Users/ronny/Downloads/MABe-mouse-behavior-detection
+output_dir: ./outputs
+
+# Experiment settings
+experiment_name: mabe_baseline
+seed: 42
+
+# Logging
+wandb:
+  enabled: true
+  project: mabe-competition
+  tags: [baseline]

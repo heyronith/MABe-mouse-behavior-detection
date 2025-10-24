@@ -1,0 +1,33 @@
+# Phase 2 training configuration
+model_name: dual_branch
+
+# Loss configuration
+loss: focal
+focal_alpha: effective_num
+focal_gamma: 2.0
+temporal_consistency_weight: 0.1
+
+# Optimizer
+optimizer: adamw
+lr: 1e-4  # Lower LR for transformer
+weight_decay: 1e-4
+gradient_clip: 1.0
+
+# Scheduler
+scheduler: cosine_warmup
+warmup_epochs: 3
+min_lr: 1e-6
+
+# Training enhancements
+mixed_precision: true
+gradient_checkpointing: true  # Memory efficient for transformers
+accumulate_grad_batches: 2
+
+# Validation
+val_check_interval: 0.25
+early_stopping_patience: 15
+early_stopping_metric: val_f1_worst_lab
+
+# Phase 2 specific
+compile_model: false  # Enable for production with PyTorch 2.0+
+deterministic_training: true

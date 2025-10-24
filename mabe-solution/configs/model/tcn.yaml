@@ -1,0 +1,20 @@
+# Model architecture
+name: dilated_tcn
+
+# Input features
+n_features: 64  # After feature extraction
+n_behaviors: 25  # Based on behaviors_labeled column
+
+# TCN parameters
+hidden_dim: 512
+layers: 4
+dilation: [1, 2, 4, 8]
+kernel_size: 3
+dropout: 0.1
+
+# Output head
+head: sigmoid  # Multi-label classification
+
+# Regularization
+weight_decay: 1e-4
+gradient_clip: 1.0

@@ -1,0 +1,24 @@
+# Decoding configuration
+threshold: 0.5  # Probability threshold for segment detection
+
+# Hysteresis (two thresholds)
+hysteresis:
+  enabled: true
+  high_threshold: 0.6  # Onset threshold
+  low_threshold: 0.3   # Offset threshold
+
+# Post-processing
+min_duration: 6  # frames (0.2s @ 30fps)
+max_gap: 9       # frames (0.3s @ 30fps)
+boundary_extension: 2  # frames
+
+# Calibration
+calibration:
+  enabled: true
+  method: temperature  # temperature or isotonic
+
+# Ensemble (for later phases)
+ensemble:
+  enabled: false
+  methods: [mean]  # mean, weighted_mean, voting
+  weights: null

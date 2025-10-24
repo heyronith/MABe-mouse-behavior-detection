@@ -1,0 +1,38 @@
+# Data configuration
+train_csv: /Users/ronny/Downloads/MABe-mouse-behavior-detection/train.csv
+train_tracking_dir: /Users/ronny/Downloads/MABe-mouse-behavior-detection/train_tracking
+train_annotation_dir: /Users/ronny/Downloads/MABe-mouse-behavior-detection/train_annotation
+test_csv: /Users/ronny/Downloads/MABe-mouse-behavior-detection/test.csv
+test_tracking_dir: /Users/ronny/Downloads/MABe-mouse-behavior-detection/test_tracking
+
+# Preprocessing
+arena_center: true  # Center arena coordinates
+arena_scale: true  # Scale by body length
+egocentric: true   # Rotate so nose points +x
+smooth_trajectories: true  # Apply Savitzky-Golay smoothing
+
+# Feature extraction
+feature_types:
+  - kinematics  # speed, acceleration, angular velocity
+  - geometry    # distances, angles, body elongation
+  - social      # pairwise interactions, contact heuristics
+
+# Multi-scale windowing
+window_sizes: [256, 512, 1024, 2048]  # Multiple window sizes for different behaviors
+overlap: 0.5       # 50% overlap
+max_windows_per_video: 100  # Limit for very long videos
+
+# Augmentation (pose-safe)
+augmentation:
+  enabled: true
+  rotation_range: 0.2  # radians
+  scale_range: [0.9, 1.1]
+  flip_probability: 0.5
+  noise_std: 2.0  # pixels
+  fps_jitter: [0.8, 1.2]
+
+# Sampling
+positive_sampling_ratio: 0.3  # Fraction of positive windows in batch
+rare_behavior_threshold: 0.05  # Behaviors with <5% occurrence are rare
+hard_negative_mining: true
+max_samples_per_epoch: 10000

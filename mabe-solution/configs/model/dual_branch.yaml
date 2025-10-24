@@ -1,0 +1,37 @@
+# Dual-branch model configuration for Phase 2
+name: dual_branch
+
+# Input features (from Phase 1)
+n_features: 64
+n_behaviors: 25
+
+# Local branch (Dilated TCN for fast dynamics)
+local_branch:
+  type: dilated_tcn
+  hidden_dim: 512
+  layers: 4
+  dilation: [1, 2, 4, 8]  # Receptive field: ~0.5-2s at 30fps
+  kernel_size: 3
+  dropout: 0.1
+
+# Global branch (Temporal Transformer for long-range interactions)
+global_branch:
+  type: temporal_transformer
+  d_model: 256
+  n_heads: 8
+  n_layers: 6
+  max_len: 2048  # Support up to 2048 frame sequences
+  dropout: 0.1
+  cross_agent_attention: true
+  relative_pos_encoding: true
+
+# Fusion and output
+fusion:
+  type: linear  # linear, attention, or adaptive
+  hidden_dim: 512
+  dropout: 0.1
+
+# Training optimizations
+mixed_precision: true
+gradient_checkpointing: true  # For memory efficiency
+compile_model: false  # Set to true for production with PyTorch 2.0+

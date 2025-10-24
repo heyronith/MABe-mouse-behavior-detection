@@ -1,0 +1,32 @@
+# Training configuration
+batch_size: 32
+num_workers: 4
+max_epochs: 50
+
+# Optimizer
+optimizer: adamw
+lr: 3e-4
+weight_decay: 1e-4
+
+# Scheduler
+scheduler: cosine
+warmup_epochs: 5
+min_lr: 1e-6
+
+# Loss
+loss: focal
+focal_alpha: effective_num  # Class-balanced
+focal_gamma: 2.0
+label_smoothing: 0.1
+
+# Validation
+val_check_interval: 0.25  # Check every 25% of epoch
+early_stopping_patience: 10
+early_stopping_metric: val_f1_worst_lab
+
+# Mixed precision
+precision: 16-mixed
+
+# Checkpointing
+save_top_k: 3
+monitor: val_f1_worst_lab
